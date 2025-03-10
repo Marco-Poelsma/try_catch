@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 public class Main {
@@ -16,7 +17,22 @@ public class Main {
         System.out.println("Here is our Integer Array:");
         System.out.println(Arrays.toString(anArray));
         System.out.print("Enter the index you want to display: ");
-        int selection = entry.nextInt();
+        int selection = 0;
+        while (true) { 
+            try {
+                selection = entry.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid integer");
+                continue;
+            }
+            try {
+                int v = anArray[selection];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter a valid index");
+                continue;
+            }
+            break;
+        }
         System.out.println("Your selction:["+anArray[selection] +"]" );
         System.out.println("Exit application?: yes or no");
         String decision = entry.next();
